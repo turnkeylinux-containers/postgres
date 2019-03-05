@@ -1,0 +1,20 @@
+{
+    "build": {
+        "USER_KEEP": "postgres"
+    },
+    "meta": {
+        "name": "postgres",
+        "version": "11",
+        "containers": [
+            {
+                "name": "postgres",
+                "version": "11",
+                "ports": {
+                    "5432": "tcp"
+                },
+                "cpu": 256,
+                "ram": 512
+            }
+        ]
+    }
+}

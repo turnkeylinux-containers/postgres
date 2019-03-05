@@ -1,0 +1,28 @@
+#!/bin/bash
+set -exuo pipefail
+
+export PGDATA=/var/lib/postgresql/data
+export LANG=en_US.UTF-8
+export PATH=$PATH:/usr/lib/postgresql/${PRODUCT_VERSION}/bin
+
+apt-get install "postgresql-common"
+sed -i 's|^#\?\(create_main_cluster\) *=.*$|\1 = false|' /etc/postgresql-common/createcluster.conf
+
+apt-get install "postgresql-${PRODUCT_VERSION}"
+mv "/usr/share/postgresql/${PRODUCT_VERSION}/postgresql.conf.sample" /usr/share/postgresql/
+ln -s ../postgresql.conf.sample "/usr/share/postgresql/${PRODUCT_VERSION}/"
+sed -i "s|^#\?\(listen_addresses\) *= *[^ ]\+.*|\1 = '*'|" /usr/share/postgresql/postgresql.conf.sample
+
+usermod -d /var/lib/postgresql "${APP_NAME}"
+mkdir -p /var/lib/postgresql
+chown -R postgres:postgres /var/lib/postgresql
+
+CFG='/etc/dpkg/dpkg.cfg.d/zz-turnkey-docker'
+if [[ -f "${CFG}" ]]; then
+    # add back locales
+    sed -i '/\/usr\/share\/locale/d' "${CFG}"
+fi
+
+apt-get install locales
+localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+

@@ -13,7 +13,7 @@ mv "/usr/share/postgresql/${PRODUCT_VERSION}/postgresql.conf.sample" /usr/share/
 ln -s ../postgresql.conf.sample "/usr/share/postgresql/${PRODUCT_VERSION}/"
 sed -i "s|^#\?\(listen_addresses\) *= *[^ ]\+.*|\1 = '*'|" /usr/share/postgresql/postgresql.conf.sample
 
-usermod -d /var/lib/postgresql "${APP_NAME}"
+usermod -d /var/lib/postgresql "${PRODUCT_NAME}"
 mkdir -p /var/lib/postgresql
 chown -R postgres:postgres /var/lib/postgresql
 

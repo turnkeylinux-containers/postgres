@@ -14,7 +14,7 @@ MY=(
 passthrough_unless 'postgres' "$@"
 
 export PGDATA="${MY[DB_DIR]}" LANG=en_US.UTF-8
-export PATH="${PATH}:/usr/lib/postgresql/${PRODUCT_VERSION}/bin"
+export PATH="${PATH}:/usr/lib/postgresql/11/bin"
 export RUNDIR=/run/postgresql
 
 ! am_root || {

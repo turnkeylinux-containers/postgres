@@ -3,7 +3,7 @@
         "build_args": {
             "PRODUCT_NAME": "postgres",
             "PRODUCT_VERSION": "11",
-            "USER_KEEP": "postgres"
+            "KEEP_USER": "postgres"
         },
         "containers": [
             {

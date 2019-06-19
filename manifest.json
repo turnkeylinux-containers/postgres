@@ -2,8 +2,7 @@
     "meta": {
         "build_args": {
             "PRODUCT_NAME": "postgres",
-            "PRODUCT_VERSION": "11",
-            "KEEP_USER": "postgres"
+            "PRODUCT_VERSION": "11"
         },
         "containers": [
             {
